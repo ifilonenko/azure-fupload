@@ -1,0 +1,21 @@
+<form>
+ <input type="file" id="fileToUpload"/>
+ <input type="button" onclick="uploadFile()" value="Upload" />
+</form>
+
+<script type='text/javascript'>
+  uploadFailed = function() {
+    console.log('Upload failed');
+  };
+
+  function uploadFile() {
+    var timestamp = (new Date()).getTime();
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("error", uploadFailed, false);
+    xhr.open("PUT", YOUR_URL);
+    xhr.setRequestHeader('x-ms-version', '2015-02-21');
+    xhr.setRequestHeader('x-ms-date', timestamp);
+    xhr.setRequestHeader('x-ms-blob-type', 'BlockBlob');
+    xhr.send(document.getElementById('fileToUpload').files[0]);
+  }
+</script>
